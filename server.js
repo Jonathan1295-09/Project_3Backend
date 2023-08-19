@@ -47,6 +47,10 @@ app.use(express.json());
 /////////////////////////////
 // INDUCES - Index, New, Delete, Update, Create, Edit, Show
 
+app.get("/", (req, res) => {
+    res.send("Hello world!")
+})
+
 ///////////////////////////
 // Server Listener
 ///////////////////////////
