@@ -47,6 +47,43 @@ app.use(express.json());
 /////////////////////////////
 // INDUCES - Index, New, Delete, Update, Create, Edit, Show
 
+//Index// 
+app.get("/albums", async (req,res) => {
+    try{
+        const album = await Albums.find({})
+        res.json(album)
+    }catch (error){
+        res.status(400).json({error})
+    }
+});
+
+//CREATE//
+app.post("/albums/:id", async (req,res) => {
+    try{
+        // create album
+        const album = await Albums.create(req.body)
+        res.json(album)
+    }catch (error){
+        res.status(400).json({error})
+    }
+})
+
+//Show//
+app.get("/albums/:id", async (req,res) => {
+    try{
+        // get a album from the database
+        const album = await Albums.findById(req.params.id)
+        // return the album as json
+        res.json(album)
+    }catch (error) {
+        res.status(400).json({error})
+    }
+})
+
+app.get("/", (req, res) => {
+    res.send("Hello world!")
+})
+
 
 
 // UPDATE
