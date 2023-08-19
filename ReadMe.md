@@ -25,7 +25,7 @@ They will be prompted to put in the name of an album, a picture of the album, ba
 
 ## ERD (ENTITY RELATIONSHIP DIAGRAM)
 
-``` mermaid
+```mermaid
 erDiagram
     NEW USER {
         string signup
@@ -38,9 +38,9 @@ erDiagram
         string password
     }
 
-    USER ||--O{ HOME : indexPage}
+    USER ||--O{ HOME : indexPage
 
-    HOME || --O{SHOW : showAlbum
+    HOME || --O{ SHOW : showAlbum
     SHOW{
         string albumName
         string artistName
