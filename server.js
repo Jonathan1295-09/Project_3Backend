@@ -80,6 +80,10 @@ app.get("/albums/:id", async (req,res) => {
     }
 })
 
+app.get("/", (req, res) => {
+    res.send("Hello world!")
+})
+
 ///////////////////////////
 // Server Listener
 ///////////////////////////
