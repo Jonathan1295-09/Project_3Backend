@@ -27,11 +27,11 @@ They will be prompted to put in the name of an album, a picture of the album, ba
 
 ```mermaid
 erDiagram
-    NEW USER {
+    newUSER {
         string signup
         string password
     }
-    NEW USER ||--O{ USER : login
+    newUSER ||--O{ USER : login
 
     USER {
         string login
