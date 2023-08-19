@@ -47,6 +47,30 @@ app.use(express.json());
 /////////////////////////////
 // INDUCES - Index, New, Delete, Update, Create, Edit, Show
 
+
+
+// UPDATE
+app.put("/albums/:id", async (req, res) => {
+    try {
+        const album = await Albums.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,
+        });
+        res.json(album);
+    } catch (error) {
+        res.status(400).json({error});
+    }
+});
+
+// DESTROY
+app.delete("/albums/:id", async (req, res) => {
+    try{
+        const album = await Albums.findByIdAndDelete(req.params.id)
+    res.status(204).json(album)
+} catch (error) {
+    res.status(400).json({error})
+}
+});
+
 ///////////////////////////
 // Server Listener
 ///////////////////////////
