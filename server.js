@@ -58,7 +58,7 @@ app.get("/albums", async (req,res) => {
 });
 
 //CREATE//
-app.post("/albums/:id", async (req,res) => {
+app.post("/albums", async (req,res) => {
     try{
         // create album
         const album = await Albums.create(req.body)
