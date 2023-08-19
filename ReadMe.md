@@ -25,5 +25,55 @@ They will be prompted to put in the name of an album, a picture of the album, ba
 
 ## ERD (ENTITY RELATIONSHIP DIAGRAM)
 
-![PICTURE OF ERD](https://i.imgur.com/SvId3PZ.png)
-![Updated ERD]()
+``` mermaid
+erDiagram
+    NEW USER {
+        string signup
+        string password
+    }
+    NEW USER ||--O{ USER : login
+
+    USER {
+        string login
+        string password
+    }
+
+    USER ||--O{ HOME : indexPage}
+
+    HOME || --O{SHOW : showAlbum
+    SHOW{
+        string albumName
+        string artistName
+        string albumImage
+        string albumSongLink
+        number albumReleaseDate
+    }
+
+    HOME || --o{ CREATE : createAlbum
+    CREATE {
+        string albumName
+        string albumArtist
+        string albumImage
+        string albumSongLink
+        number albumReleaseDate
+    }
+    SHOW || --o{ DELETE : deleteAlbum
+    DELETE {
+
+    }
+    SHOW || --o{ EDIT : editALbum
+    EDIT {
+        string albumName
+        string albumArtist
+        string albumImage
+        string albumSongLink
+        number albumReleaseDate
+    }
+
+HOME || --o{ LOGOUT : logout
+LOGOUT {
+
+    }
+```
+
+         
