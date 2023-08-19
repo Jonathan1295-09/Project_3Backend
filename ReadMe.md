@@ -2,7 +2,7 @@
 
 - **Project Name:** Personal JukeBox
 - **Project By:** Jonathan Casasola, Michael Delvecchio, Adrian Garcia 
-- [**Link To GITHUB**]
+- [**Link To  Frontend GITHUB**](https://github.com/Jonathan1295-09/Project_3Frontend)
 - [**LINK TO DEPLOYED WEBSITE**]
 - **List of technologies used** Mongoose, morgan, express, cors, dotenv 
 - [**Link to Trello**](https://trello.com/b/pHLyMGtB/project-3)
