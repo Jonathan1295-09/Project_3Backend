@@ -169,8 +169,7 @@ app.post("/login", async (req, res) => {
         res.cookie("token", token, {
             httpOnly: true,
             path: "/",
-            domain: "render.com",
-            secure: "true",
+            secure: true,
             sameSite: "none",
             maxAge: 3600000,
         });
