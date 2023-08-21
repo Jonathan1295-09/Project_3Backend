@@ -79,7 +79,7 @@ app.use(express.json());
 //Index// 
 app.get("/albums", authCheck, async (req,res) => {
     try{
-        const album = await Albums.find({})
+        const album = await Albums.find({username: req.payload.username})
         res.json(album)
     }catch (error){
         res.status(400).json({error})
