@@ -50,11 +50,15 @@ const Albums = mongoose.model("Albums", AlbumsSchema)
 //////////////////////
 
 const authCheck = async (req, res, next) => {
+    // check if the request has a cookie
     if(req.cookies.token) {
+        // if there is a cookie, try to decode it
         const payload = await jwt.verify(req.cookies.token, process.env.SECRET)
+        // store the payload in the request
         req.payload = payload;
         next();
     } else {
+        // if there is no cookie, return an error
         res.status(400).json({error: "You are not authorized"})
     }
 }
@@ -62,11 +66,14 @@ const authCheck = async (req, res, next) => {
 //////////////////////
 // Declare Middleware
 //////////////////////
+// using cors prevents cors errors (allow all requests from other origins)
 app.use(
     cors({
         origin: "https://personal-jukebox-nxb4.onrender.com",
         credentials: true,
-    }));
+    })
+);
+// cookie parser for reading cookies (you need this for auth)
 app.use(cookieParser())
 app.use(morgan("dev"));
 app.use(express.json());
@@ -76,7 +83,7 @@ app.use(express.json());
 /////////////////////////////
 // INDUCES - Index, New, Delete, Update, Create, Edit, Show
 
-//Index// 
+//Index 
 app.get("/albums", authCheck, async (req,res) => {
     try{
         const album = await Albums.find({username: req.payload.username})
@@ -143,9 +150,13 @@ app.get("/", (req, res) => {
 // Signup - Post
 app.post("/signup", async (req, res) => {
     try {
+        // deconstruct username and password from the body
         let {username, password} = req.body
+        // hash the password 
         password = await bcrypt.hash(password, await bcrypt.genSalt(15))
+        // create a new user in the database
         const user = await User.create({username, password})
+        // send the new user a json
         res.json(user)
     } catch(error) {
         res.status(400).json({error})
@@ -155,17 +166,23 @@ app.post("/signup", async (req, res) => {
 // Login - Post
 app.post("/login", async (req, res) => {
     try {
+        // deconstruct the username and password from the body
         const {username, password} = req.body
+        // search the database for a user with the provided username
         const user = await User.findOne({username})
+        // if no user is found, return an error
         if (!user) {
             throw new Error("No user with that username was found!")
         }
+        // if a user is found, compare the provided password with the password on the user object
         const passwordCheck = await bcrypt.compare(password, user.password)
-
+        //if the passwords don't match, return an error
         if (!passwordCheck) {
             throw new Error("Password does not match! Try again.")
         }
+        // create a token with the username in the payload
         const token = jwt.sign({username: user.username}, process.env.SECRET)
+        // send a response with a cookie that includes the token
         res.cookie("token", token, {
             httpOnly: true,
             path: "/",
