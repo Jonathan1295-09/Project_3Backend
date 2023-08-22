@@ -119,6 +119,7 @@ app.put("/albums/:id", authCheck, async (req, res) => {
 //CREATE//
 app.post("/albums", authCheck, async (req,res) => {
     try{
+        req.body.username = req.payload.username
         // create album
         const album = await Albums.create(req.body)
         res.json(album)
