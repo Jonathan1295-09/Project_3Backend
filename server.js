@@ -41,6 +41,7 @@ const AlbumsSchema = new mongoose.Schema({
     image: String,
     yearReleased: Number,
     linkToAlbum: String,
+    username: String
 })
 
 const Albums = mongoose.model("Albums", AlbumsSchema)
