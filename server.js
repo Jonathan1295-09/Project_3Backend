@@ -190,7 +190,7 @@ app.post("/login", async (req, res) => {
             path: "/",
             secure: true,
             sameSite: "none",
-            maxAge: 3600000,
+            maxAge: 31556952000,
         });
         res.json({message: "Login successful!"})
     } catch(error) {
