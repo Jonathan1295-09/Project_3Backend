@@ -161,7 +161,7 @@ app.post("/signup", async (req, res) => {
         // send the new user a json
         res.json(user)
     } catch(error) {
-        res.status(400).json({error})
+        res.status(400).json({error: "This username is already taken! Choose another."})
     }
 })
 
